@@ -1,0 +1,36 @@
+<app-header></app-header>
+
+<section class="min-vh-100">
+  <div class="container my-5">
+    <h2>Liste des compétences</h2>
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" (click)="addSkill()">Ajouter une compétence</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Coefficient</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let skill of skills">
+            <td>{{ skill.id }}</td>
+            <td>{{ skill.name }}</td>
+            <td>{{ skill.description || 'N/A' }}</td>
+            <td>{{ skill.coefficient }}</td>
+            <td>
+              <button class="btn btn-primary me-2" (click)="editSkill(skill.id)">Modifier</button>
+              <button class="btn btn-info me-2" (click)="viewSkill(skill.id)">Consulter</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>   
+  </div>
+</section>
+  <app-footer></app-footer>
