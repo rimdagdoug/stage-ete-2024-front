@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SkillsRoutingModule } from './pages/skills/skills-routing.module';
+import { EvalRoutingModule } from './pages/eval/eval-routing.module';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -12,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), SkillsRoutingModule],
+  imports: [RouterModule.forRoot(routes), SkillsRoutingModule,EvalRoutingModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
