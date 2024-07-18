@@ -1,4 +1,4 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AddSkillsComponent } from './add-skills/add-skills.component';
 import { EditSkillsComponent } from './edit-skills/edit-skills.component';

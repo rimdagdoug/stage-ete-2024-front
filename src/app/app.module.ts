@@ -11,12 +11,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { CommonModule } from '@angular/common';
 import { SkillsModule } from './pages/skills/skills.module';
 import { SharedModule } from './shared/shared/shared.module';
+import { EvalModule } from './pages/eval/eval.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { SharedModule } from './shared/shared/shared.module';
     HttpClientModule,
     CommonModule,
     SkillsModule,
-    SharedModule
+    SharedModule,
+    EvalModule,
   ],
   providers: [
     {
