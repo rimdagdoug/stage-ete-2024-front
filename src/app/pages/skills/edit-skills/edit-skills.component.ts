@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SkillService } from 'src/app/services/skill.service';
 
@@ -8,6 +9,7 @@ import { SkillService } from 'src/app/services/skill.service';
   styleUrls: ['./edit-skills.component.css']
 })
 export class EditSkillsComponent implements OnInit {
+  skillForm: FormGroup;
 
   skill: any;
 
@@ -15,7 +17,13 @@ export class EditSkillsComponent implements OnInit {
     private skillService: SkillService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.skillForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      coefficient: new FormControl('', [Validators.required, Validators.min(1)])
+    });
+  }
 
   ngOnInit(): void {
     this.getSkill();
@@ -25,24 +33,28 @@ export class EditSkillsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.skillService.getSkillById(parseInt(id)).subscribe(
-        skill => this.skill = skill
+        skill => {
+          this.skillForm.patchValue(skill);
+        }
       );
     }
   }
 
   updateSkill(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id !== null) {
-      this.skillService.updateSkill(parseInt(id), this.skill).subscribe(
-        updatedSkill => {
-        
-          this.router.navigate(['/list-skills']);
-        },
-        error => {
-          console.error('Erreur lors de la mise à jour de la compétence :', error);
-          
-        }
-      );
+    if (this.skillForm.valid) {
+      const id = this.route.snapshot.paramMap.get('id');
+      if (id !== null) {
+        this.skillService.updateSkill(parseInt(id), this.skillForm.value).subscribe(
+          updatedSkill => {
+            this.router.navigate(['/list-skills']);
+          },
+          error => {
+            console.error('Error updating skill:', error);
+          }
+        );
+      }
+    } else {
+      console.warn('Form is invalid:', this.skillForm.errors);
     }
   }
   

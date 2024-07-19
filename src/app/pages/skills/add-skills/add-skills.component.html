@@ -2,20 +2,30 @@
 <section class="vh-100">
   <div class="container my-5">
     <h2>Ajouter une compétence</h2>
-    <form (ngSubmit)="addskill(skill)">
+    <form (ngSubmit)="addSkill()" [formGroup]="skillForm">
       <div class="mb-3">
         <label for="name" class="form-label">Nom de la compétence</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="skill.name" name="name" required>
+        <input type="text" class="form-control" id="name" formControlName="name" name="name" required>
+        <div class="text-danger" *ngIf="skillForm.controls['name'].invalid && (skillForm.controls['name'].touched || skillForm.controls['name'].dirty)">
+          <span >Le champ est requis.</span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" [(ngModel)]="skill.description" name="description" rows="3" required></textarea>
+        <textarea class="form-control" id="description" formControlName="description"  name="description" rows="3" required></textarea>
+        <div class="text-danger" *ngIf="skillForm.controls['description'].invalid && skillForm.controls['description'].touched ">
+          <span >Le champ est requis.</span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="coefficient" class="form-label">Coefficient</label>
-        <input type="number" class="form-control" id="coefficient" [(ngModel)]="skill.coefficient" name="coefficient" required>
+        <input type="number" class="form-control" id="coefficient" formControlName="coefficient" name="coefficient" required>
+        <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && (skillForm.controls['coefficient'].touched || skillForm.controls['password'].dirty)">
+          <span *ngIf="skillForm.controls['coefficient'].errors?.['required']">Le champ est requis.</span>
+          <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Coefficient must be a positive number</span>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Ajouter</button>
+      <button type="submit" [disabled]="skillForm.invalid" class="btn btn-primary">Ajouter</button>
     </form>
   </div>
 </section>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { AddSkillsComponent } from './add-skills/add-skills.component';
 import { EditSkillsComponent } from './edit-skills/edit-skills.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SkillsRoutingModule } from './skills-routing.module';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,8 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
     CommonModule,
     SkillsRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     AddSkillsComponent,

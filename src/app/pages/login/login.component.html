@@ -6,30 +6,40 @@
             class="img-fluid" alt="Sample image">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form>
+          <form [formGroup]="userForm">
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0">Sign in</p>
             </div>
   
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline mb-4">
-              <input type="email" name="email" [(ngModel)]="loginForm.email" class="form-control form-control-lg"
+              <label class="form-label" for="form3Example3">Email </label>
+              <input type="email" name="email" formControlName="email" class="form-control form-control-lg"
                 placeholder="Enter a valid email address" required=""/>
-              <label class="form-label" for="form3Example3">Email address</label>
+                <div class="text-danger" *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                  <span *ngIf="userForm.controls['email'].errors?.['required']">Le champ est requis.</span>
+                  <span *ngIf="userForm.controls['email'].errors?.['email']"> L'email est invalide. Veuillez entrer une adresse e-mail valide.
+                  </span>
+                </div>
             </div>
   
             <!-- Password input -->
             <div data-mdb-input-init class="form-outline mb-3">
-              <input type="password" name="password" [(ngModel)]="loginForm.password" class="form-control form-control-lg"
+              <label class="form-label" for="form3Example4">Mot de passe</label>
+              <input type="password" name="password" formControlName="password"  class="form-control form-control-lg"
                 placeholder="Enter password" required=""/>
-              <label class="form-label" for="form3Example4">Password</label>
+                <div class="text-danger" *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+                  <span *ngIf="userForm.controls['password'].errors?.['required']">Le champ est requis.</span>
+                  <span *ngIf="userForm.controls['password'].errors?.['minlength']">Un minimum de 6 caractères est requis.</span>
+                </div>
+
             </div>
   
         
   
             <div class="text-center text-lg-start mt-4 pt-2">
               <button (click)="onLogin()" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Se connecter</button>
 
             </div>
   
