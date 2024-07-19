@@ -20,7 +20,7 @@
       <div class="mb-3">
         <label for="coefficient" class="form-label">Coefficient</label>
         <input type="number" class="form-control" id="coefficient" formControlName="coefficient" name="coefficient" required>
-        <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && (skillForm.controls['coefficient'].touched || skillForm.controls['password'].dirty)">
+        <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && skillForm.controls['coefficient'].touched">
           <span *ngIf="skillForm.controls['coefficient'].errors?.['required']">Le champ est requis.</span>
           <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Coefficient must be a positive number</span>
         </div>

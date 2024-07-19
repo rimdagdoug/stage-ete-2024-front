@@ -6,14 +6,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="'/list-eval'" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Evaluations
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Évaluations
           </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="'/list-eval'">Liste Évaluation</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/add-eval'">Ajouter Évaluation</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="'/list-skills'" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Competence
+          <a class="nav-link dropdown-toggle" id="navbarDropdownSkills" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Compétences
           </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownSkills">
+            <li><a class="dropdown-item" [routerLink]="'/list-skills'">Liste Compétence</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/add-skills'">Ajouter Compétence</a></li>
+          </ul>
         </li>
       </ul>
       <form class="d-flex">
