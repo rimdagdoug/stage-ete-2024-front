@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { CommonModule } from '@angular/common';
@@ -29,6 +29,7 @@ import { EvalModule } from './pages/eval/eval.module';
     SkillsModule,
     SharedModule,
     EvalModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

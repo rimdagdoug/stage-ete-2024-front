@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,17 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  userForm: FormGroup;
 
-  loginForm: any = {
-      email: '',
-      password: ''
-    
-  };
-  constructor(private http: HttpClient, private router: Router){}
+ 
+  constructor(private http: HttpClient, private router: Router){
+    this.userForm = new FormGroup({
+      email: new FormControl("",[Validators.required,Validators.email]),
+      password: new FormControl("", [Validators.required,Validators.minLength(6)])
+    })
+  }
 
   onLogin(){
-
-    this.http.post('http://localhost:8080/api/auth/authenticate',this.loginForm).subscribe((data:any)=>{
+    const loginData = this.userForm.value;
+    this.http.post('http://localhost:8080/api/auth/authenticate',loginData).subscribe((data:any)=>{
       if(data){
 
             localStorage.setItem('token',data.token);
