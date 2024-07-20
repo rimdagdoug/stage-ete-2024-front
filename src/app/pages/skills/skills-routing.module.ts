@@ -4,22 +4,27 @@ import { AddSkillsComponent } from './add-skills/add-skills.component';
 import { EditSkillsComponent } from './edit-skills/edit-skills.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { DetailSkillComponent } from './detail-skill/detail-skill.component';
+import { authGuard } from 'src/app/services/auth.guard';
 
 const routes: Routes = [
   {
     path: 'add-skills',
-    component: AddSkillsComponent
+    component: AddSkillsComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'edit-skills/:id',
-    component: EditSkillsComponent
+    component: EditSkillsComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'list-skills',
-    component: ListSkillsComponent
+    component: ListSkillsComponent,
+    canActivate: [authGuard]
   },
   {  path: 'detail-skill/:id',
-    component: DetailSkillComponent
+    component: DetailSkillComponent,
+    canActivate: [authGuard]
   }
 
 ];

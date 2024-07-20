@@ -4,11 +4,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SkillsRoutingModule } from './pages/skills/skills-routing.module';
 import { EvalRoutingModule } from './pages/eval/eval-routing.module';
+import { authGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'',redirectTo:'login',pathMatch:'full'},
-  {path:"dashboard",component:DashboardComponent},
+  {path:"dashboard",
+    component:DashboardComponent,
+  canActivate: [authGuard]},
   {path:'**',component:LoginComponent}
 ];
 
