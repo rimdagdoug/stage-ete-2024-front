@@ -1,26 +1,39 @@
-<div class="container">
- 
-    <h2>Ajouter une évaluation</h2>
-  
-    <form (ngSubmit)="addEval(evaluation)">
-      <div class="form-group">
-        <label for="manager">Manager</label>
-        <select class="form-control" id="manager" [(ngModel)]="evaluation.managerId" name="manager">
-          <option *ngFor="let manager of managers" [value]="manager.id">
-            {{ manager.firstname }} {{ manager.lastname }}
-          </option>
-        </select>
+<app-header></app-header>
+<section class="min-vh-100 bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">Ajouter une évaluation</h2>
+        
+        <form (ngSubmit)="addEval(evaluation)" #evalForm="ngForm">
+          <div class="mb-3">
+            <label for="manager" class="form-label">Responsable</label>
+            <select class="form-select" id="manager" [(ngModel)]="evaluation.managerId" name="manager" required>
+              <option value="" disabled selected>Sélectionnez un manager</option>
+              <option *ngFor="let manager of managers" [value]="manager.id">
+                {{ manager.firstname }} {{ manager.lastname }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="developer" class="form-label">Collaborateur</label>
+            <select class="form-select" id="developer" [(ngModel)]="evaluation.developerId" name="developer" required>
+              <option value="" disabled selected>Sélectionnez un collaborateur</option>
+              <option *ngFor="let developer of developers" [value]="developer.id">
+                {{ developer.firstname }} {{ developer.lastname }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!evalForm.form.valid">
+              Ajouter l'évaluation
+            </button>
+          </div>
+        </form>
       </div>
-  
-      <div class="form-group">
-        <label for="developer">Développeur</label>
-        <select class="form-control" id="developer" [(ngModel)]="evaluation.developerId" name="developer">
-          <option *ngFor="let developer of developers" [value]="developer.id">
-            {{ developer.firstname }} {{ developer.lastname }}
-          </option>
-        </select>
-      </div>
-  
-      <button type="submit" class="btn btn-primary">Ajouter</button>
-    </form>
+    </div>
   </div>
+</section>
+<app-footer></app-footer>

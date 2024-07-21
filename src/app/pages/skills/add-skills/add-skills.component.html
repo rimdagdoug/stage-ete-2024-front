@@ -1,34 +1,44 @@
 <app-header></app-header>
-<section class="vh-100">
-  <div class="container my-5">
-    <h2>Ajouter une compétence</h2>
-    <form (ngSubmit)="addSkill()" [formGroup]="skillForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nom de la compétence</label>
-        <input type="text" class="form-control" id="name" formControlName="name" name="name" required>
-        <div class="text-danger" *ngIf="skillForm.controls['name'].invalid && (skillForm.controls['name'].touched || skillForm.controls['name'].dirty)">
-          <span >Le champ est requis.</span>
-        </div>
+<section class="min-vh-100 bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">Ajouter une compétence</h2>
+        
+        <form (ngSubmit)="addSkill()" [formGroup]="skillForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nom de la compétence</label>
+            <input type="text" class="form-control" id="name" formControlName="name" name="name" required>
+            <div class="text-danger" *ngIf="skillForm.controls['name'].invalid && (skillForm.controls['name'].touched || skillForm.controls['name'].dirty)">
+              <span>Le champ est requis.</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" name="description" rows="3" required></textarea>
+            <div class="text-danger" *ngIf="skillForm.controls['description'].invalid && skillForm.controls['description'].touched">
+              <span>Le champ est requis.</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="coefficient" class="form-label">Coefficient</label>
+            <input type="number" class="form-control" id="coefficient" formControlName="coefficient" name="coefficient" required>
+            <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && skillForm.controls['coefficient'].touched">
+              <span *ngIf="skillForm.controls['coefficient'].errors?.['required']">Le champ est requis.</span>
+              <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Le coefficient doit être un nombre positif.</span>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="skillForm.invalid">
+              Ajouter la compétence
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" formControlName="description"  name="description" rows="3" required></textarea>
-        <div class="text-danger" *ngIf="skillForm.controls['description'].invalid && skillForm.controls['description'].touched ">
-          <span >Le champ est requis.</span>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="coefficient" class="form-label">Coefficient</label>
-        <input type="number" class="form-control" id="coefficient" formControlName="coefficient" name="coefficient" required>
-        <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && skillForm.controls['coefficient'].touched">
-          <span *ngIf="skillForm.controls['coefficient'].errors?.['required']">Le champ est requis.</span>
-          <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Coefficient must be a positive number</span>
-        </div>
-      </div>
-      <button type="submit" [disabled]="skillForm.invalid" class="btn btn-primary">Ajouter</button>
-    </form>
+    </div>
   </div>
 </section>
-
-  <app-footer></app-footer>
-
+<app-footer></app-footer>
