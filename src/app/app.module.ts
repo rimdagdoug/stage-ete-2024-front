@@ -12,12 +12,14 @@ import { CommonModule } from '@angular/common';
 import { SkillsModule } from './pages/skills/skills.module';
 import { SharedModule } from './shared/shared/shared.module';
 import { EvalModule } from './pages/eval/eval.module';
+import { PermissionDirectiveDirective } from './shared/directive/permission-directive.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+
     
   ],
   imports: [
@@ -38,6 +40,7 @@ import { EvalModule } from './pages/eval/eval.module';
       multi: true
     }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

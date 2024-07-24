@@ -1,16 +1,14 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const roleGuardGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const localData = localStorage.getItem('token');
   const localRole = localStorage.getItem('role');
-  if(localData != null){
+  if(localRole== "RH") {
     return true;
   }else{
-    router.navigateByUrl('/login');
+    router.navigateByUrl('/dashboard');
     return false;
   }
-  
   
 };

@@ -11,10 +11,10 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" [routerLink]="'/list-eval'">Liste Évaluation</a></li>
-            <li><a class="dropdown-item" [routerLink]="'/add-eval'">Planifier Évaluation</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/add-eval'" *appPermissionDirective="'RH'">Planifier Évaluation</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *appPermissionDirective="'RH'">
           <a class="nav-link dropdown-toggle" id="navbarDropdownSkills" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Compétences
           </a>
