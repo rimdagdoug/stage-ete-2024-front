@@ -7,11 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
-  constructor(private router: Router) {}
+  firstname: string | null;
+  lastname: string | null;
+  constructor(private router: Router) {
+    this.firstname = localStorage.getItem('firstname');
+    this.lastname = localStorage.getItem('lastname');
+  }
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('firstname');
+    localStorage.removeItem('lastname');
     this.router.navigate(['/login']);
   }
 }
