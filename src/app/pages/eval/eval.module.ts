@@ -4,8 +4,11 @@ import { AddEvalComponent } from './add-eval/add-eval.component';
 import { EditEvalComponent } from './edit-eval/edit-eval.component';
 import { ListEvalComponent } from './list-eval/list-eval.component';
 import { EvalRoutingModule } from './eval-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { CompleteEvalComponent } from './complete-eval/complete-eval.component';
+import { DetailEvalComponent } from './detail-eval/detail-eval.component';
+
 
 
 
@@ -14,13 +17,17 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   declarations: [
     AddEvalComponent,
     EditEvalComponent,
-    ListEvalComponent
+    ListEvalComponent,
+    CompleteEvalComponent,
+    DetailEvalComponent,
+   
   ],
   imports: [
     CommonModule,
     EvalRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
     
   ],
   exports: [

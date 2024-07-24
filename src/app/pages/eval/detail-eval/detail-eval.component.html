@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div *ngIf="skills.length > 0; else noData" class="container mt-4">
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Skill Name</th>
+          <th>Developer Note</th>
+          <th>Manager Note</th>
+          <th>Final Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let skill of skills">
+          <td>{{ skill.skills.name }}</td>
+          <td>{{ skill.noteDeveloper }}</td>
+          <td>{{ skill.noteManager }}</td>
+          <td>{{ skill.finalNote }}</td>
+         
+
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="finalScore !== null" class="mt-4">
+        <h4>Final Score: {{ finalScore }}</h4>
+      </div>
+  </div>
+  <ng-template #noData>
+    <div class="alert alert-warning mt-4" role="alert">
+      No skills found for this evaluation.
+    </div>
+  </ng-template>
+  <app-footer></app-footer>
+  
