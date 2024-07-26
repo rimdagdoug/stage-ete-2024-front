@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EvalService } from 'src/app/services/eval.service';
 
@@ -12,7 +12,7 @@ import { EvalService } from 'src/app/services/eval.service';
 export class CompleteEvalComponent implements OnInit{
   evalForm: FormGroup  =new FormGroup({
     evaluationId: new FormControl(""),
-    skills: new FormArray([])
+    skills: new FormArray([],Validators.required)
   })
   constructor(private evalservice: EvalService,private route:ActivatedRoute,private router: Router){
    
@@ -46,7 +46,7 @@ export class CompleteEvalComponent implements OnInit{
         skillId: new FormControl(item.skills.id),
         name: new FormControl(item.skills.name),
         description: new FormControl(item.skills.description),
-        note: new FormControl('') 
+        note: new FormControl('', [Validators.required,Validators.min(0)]) 
       })
     );
   }
