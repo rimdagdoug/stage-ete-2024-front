@@ -17,26 +17,29 @@
             </thead>
             <tbody formArrayName="skills">
               <tr *ngFor="let skill of skillsArray.controls; let i = index" [formGroupName]="i">
-                <td class="text-center">{{i + 1}}</td>
+                <td class="text-center">{{ i + 1 }}</td>
                 <td class="text-center">
-                  <span>{{skill.get('name')!.value}}</span>
+                  <span>{{ skill.get('name')!.value }}</span>
                 </td>
                 <td class="text-center">
-                  <span>{{skill.get('description')!.value}}</span>
+                  <span>{{ skill.get('description')!.value }}</span>
                 </td>
                 <td>
-                  <input id="note-{{i}}" formControlName="note" type="text" class="form-control">
+                  <input id="note-{{ i }}" formControlName="note" type="number" class="form-control" required>
+                  <div *ngIf="skill.get('note')?.invalid && (skill.get('note')?.touched || skill.get('note')?.dirty)" class="text-danger">
+                    <div *ngIf="skill.get('note')?.errors?.['required']">La note est requise.</div>
+                    <div *ngIf="skill.get('note')?.errors?.['min']">La note ne peut pas être négative.</div>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          
+
           <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="evalForm.invalid">Valider</button>
         </form>
-          
-    
-    </div>
+      </div>
     </div>
   </div>
 </section>
+
 <app-footer></app-footer>

@@ -7,7 +7,7 @@
         <h2 class="text-center mb-4">Liste des évaluations</h2>
         
         <div class="d-flex justify-content-end mb-3">
-          <button class="btn btn-success" [routerLink]="'/add-eval'">Ajouter une évaluation</button>
+          <button class="btn btn-success" [routerLink]="'/add-eval'" *appPermissionDirective="'RH'">Ajouter une évaluation</button>
         </div>
         
         <div class="table-responsive">
