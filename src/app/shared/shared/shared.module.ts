@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../component/header/header.component';
+import { FooterComponent } from '../component/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { PermissionDirectiveDirective } from '../directive/permission-directive.directive';
-
+import { PermissionDirective } from '../directive/permission.directive';
+import { ShowButtonPipe } from '../pipe/show-button.pipe';
+import { StatusEvalPipe } from '../pipe/status-eval.pipe';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    PermissionDirectiveDirective,
+    PermissionDirective,
+    StatusEvalPipe,
+    ShowButtonPipe,
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,9 @@ import { PermissionDirectiveDirective } from '../directive/permission-directive.
   exports: [
     HeaderComponent,
     FooterComponent,
-    PermissionDirectiveDirective
+    PermissionDirective,
+    StatusEvalPipe,
+    ShowButtonPipe,
   ],
 })
 export class SharedModule { }

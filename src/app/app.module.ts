@@ -4,23 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthInterceptor } from './shared/intercepteur/auth.interceptor';
 import { CommonModule } from '@angular/common';
 import { SkillsModule } from './pages/skills/skills.module';
 import { SharedModule } from './shared/shared/shared.module';
 import { EvalModule } from './pages/eval/eval.module';
-import { PermissionDirectiveDirective } from './shared/directive/permission-directive.directive';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
-
-    
   ],
   imports: [
     BrowserModule,

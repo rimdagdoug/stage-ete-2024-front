@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } f
 @Directive({
   selector: '[appPermissionDirective]'
 })
-export class PermissionDirectiveDirective implements OnInit{
+export class PermissionDirective implements OnInit{
 
   @Input('appPermissionDirective') roleToCheck!: string;
 
@@ -15,14 +15,7 @@ export class PermissionDirectiveDirective implements OnInit{
 
   ngOnInit(): void {
     const role : string | undefined = localStorage.getItem('role')?.toString();
-    console.log(role);
-    console.log(this.roleToCheck);
-    const isRoleValid = role === this.roleToCheck;
-      if(isRoleValid) {
-        this.viewContainer.createEmbeddedView(this.templateRef);
-      }else{
-        this.viewContainer.clear();
-      }
+    role === this.roleToCheck ? this.viewContainer.createEmbeddedView(this.templateRef) : this.viewContainer.clear();
   }
 
 }
