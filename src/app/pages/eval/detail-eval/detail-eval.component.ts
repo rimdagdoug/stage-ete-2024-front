@@ -13,6 +13,7 @@ export class DetailEvalComponent implements OnInit{
   evaluationId!: number;
   skills: notes[] = [];
   finalScore: number | null = null;
+  evals: any;
 
   constructor(private route: ActivatedRoute, private evalService: EvalService) { }
 
@@ -25,6 +26,7 @@ export class DetailEvalComponent implements OnInit{
   getSkillsWithNotes(id: number): void {
     this.evalService.getResultatEvaluationByIdEval(id).subscribe(
       data => {
+        this.evals = data;
         this.skills = data;
       },
       error => {

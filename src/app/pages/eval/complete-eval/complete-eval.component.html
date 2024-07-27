@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <h2 class="text-center mb-4">Saisie Note</h2>
+        <h2 class="text-center mb-4">Évaluation : {{ evals[0]!.evaluation!.developer!.firstname }}  {{ evals[0]!.evaluation!.developer!.lastname }}</h2>
         <form [formGroup]="evalForm" (ngSubmit)="onSubmit()" class="container mt-4">
           <table class="table table-striped table-bordered">
             <thead>

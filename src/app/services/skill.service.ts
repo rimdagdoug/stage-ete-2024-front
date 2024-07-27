@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SkillService {
   private apiUrl = 'http://localhost:8080/skills';
+  private apiUrlRoles = 'http://localhost:8080/roles';
 
 
   constructor(private http:HttpClient) { }
@@ -25,5 +26,9 @@ export class SkillService {
 
   updateSkill(id: number, skill: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, skill);
+  }
+
+  getRoles(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrlRoles);
   }
 }

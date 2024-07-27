@@ -12,6 +12,7 @@ export class EditSkillsComponent implements OnInit {
   skillForm: FormGroup;
 
   skill: any;
+  roles: any[] = []; 
 
   constructor(
     private skillService: SkillService,
@@ -21,12 +22,14 @@ export class EditSkillsComponent implements OnInit {
     this.skillForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      coefficient: new FormControl('', [Validators.required, Validators.min(1)])
+      coefficient: new FormControl('', [Validators.required, Validators.min(1)]),
+      skillType: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit(): void {
     this.getSkill();
+    this.getRoles(); 
   }
 
   getSkill(): void {
@@ -38,6 +41,12 @@ export class EditSkillsComponent implements OnInit {
         }
       );
     }
+  }
+
+  getRoles(): void {
+    this.skillService.getRoles().subscribe(roles => {
+      this.roles = roles;
+    });
   }
 
   updateSkill(): void {
