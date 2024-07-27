@@ -28,7 +28,7 @@ export class LoginComponent {
             localStorage.setItem('firstname',data.firstname);
             localStorage.setItem('lastname',data.lastname);
             localStorage.setItem('role',data.role);
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/list-eval');
         }else{
             console.warn('token non valide')
         }     

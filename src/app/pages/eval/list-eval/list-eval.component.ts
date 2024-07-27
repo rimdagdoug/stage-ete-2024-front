@@ -9,11 +9,15 @@ import { EvalService } from 'src/app/services/eval.service';
 export class ListEvalComponent implements OnInit{
  
   evals: any[]=[];
-
+  role = localStorage.getItem('role');
+  
   constructor(private evalservice:EvalService){}
 
   ngOnInit(): void {
-    this.evalservice.geteval().subscribe(evals=>this.evals=evals);
+     this.evalservice.geteval().subscribe( evals => {
+      this.evals = evals;     
+  }
+    );
   }
 
 
