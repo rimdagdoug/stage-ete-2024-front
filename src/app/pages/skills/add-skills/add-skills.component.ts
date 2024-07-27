@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SkillService } from 'src/app/services/skill.service';
@@ -8,16 +8,22 @@ import { SkillService } from 'src/app/services/skill.service';
   templateUrl: './add-skills.component.html',
   styleUrls: ['./add-skills.component.css']
 })
-export class AddSkillsComponent {
+export class AddSkillsComponent implements OnInit {
 
   skillForm: FormGroup;
+  roles: any[] = []; 
 
   constructor(private skillService: SkillService, private router: Router) { 
     this.skillForm = new FormGroup({
       name: new FormControl("",[Validators.required]),
       description: new FormControl("",[Validators.required]),
-      coefficient: new FormControl("",[Validators.required,Validators.min(1)])
+      coefficient: new FormControl("",[Validators.required,Validators.min(0)]),
+      skillType: new FormControl("", [Validators.required])
     })
+  }
+
+  ngOnInit(): void {
+    this.getRoles(); 
   }
   
   addSkill(): void {
@@ -32,5 +38,10 @@ export class AddSkillsComponent {
     }
   }
  
+  getRoles() {
+    this.skillService.getRoles().subscribe(roles => {
+      this.roles = roles;
+    });
+  }
 
 }

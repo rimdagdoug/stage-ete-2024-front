@@ -25,6 +25,16 @@
           <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Coefficient must be a positive number</span>
         </div>
       </div>
+      <div class="mb-3">
+        <label for="skillType" class="form-label">Type de compétence</label>
+        <select class="form-control" id="skillType" formControlName="skillType" required>
+          <option value="" disabled selected>Choisissez un type de compétence</option>
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+        <div class="text-danger" *ngIf="skillForm.controls['skillType'].invalid && (skillForm.controls['skillType'].touched || skillForm.controls['skillType'].dirty)">
+          <span>Le champ est requis.</span>
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
   </div>

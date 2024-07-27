@@ -15,7 +15,8 @@ export class DetailSkillComponent implements OnInit {
     this.skillForm = new FormGroup({
       name: new FormControl({ value: '', disabled: true }), 
       description: new FormControl({ value: '', disabled: true }), 
-      coefficient: new FormControl({ value: '', disabled: true }) 
+      coefficient: new FormControl({ value: '', disabled: true }) ,
+      skillType: new FormControl({ value: '', disabled: true })
     });
    }
   

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EvalService } from 'src/app/services/eval.service';
-import { Evaluation } from 'src/app/shared/interfaces/evaluation.interface';
+
 
 @Component({
   selector: 'app-complete-eval',
@@ -11,15 +11,21 @@ import { Evaluation } from 'src/app/shared/interfaces/evaluation.interface';
   styleUrls: ['./complete-eval.component.css']
 })
 export class CompleteEvalComponent implements OnInit{
+  firstname: string | null;
+  lastname: string | null;
   evalForm: FormGroup  = new FormGroup({
     evaluationId: new FormControl(""),
-    skills: new FormArray([], Validators.required)
+    skills: new FormArray([], Validators.required) 
   })
   idEval : number = 0;
+  evals: any;
   constructor(
     private evalservice: EvalService,
     private route:ActivatedRoute,
-    private router: Router){}
+    private router: Router){
+      this.firstname = localStorage.getItem('firstname');
+      this.lastname = localStorage.getItem('lastname');
+    }
 
   ngOnInit(): void {
    this.route.params.subscribe(params=> {
@@ -32,6 +38,7 @@ export class CompleteEvalComponent implements OnInit{
   initialiseForm(id: number): void{
     this.evalservice.getResultatEvaluationByIdEval(id).subscribe(
       evaluation=> {
+       this.evals = evaluation;
         this.evalForm.controls['evaluationId'].setValue(id);
         evaluation.forEach((item:any) => {
             this.addSkills(item);        
