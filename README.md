@@ -39,7 +39,7 @@ Le projet est divisé en deux répertoires principaux :
 2. Critères d'évaluation personnalisables
 3. Interface d'auto-évaluation pour les employés
 4. Espace dédié aux managers pour évaluer leurs équipes
-. Système d'authentification et de gestion des rôles (employés, managers, RH)
+5. Système d'authentification et de gestion des rôles (employés, managers, RH)
 
 ## Installation et Configuration
 
