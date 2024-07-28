@@ -1,0 +1,49 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form [formGroup]="userForm">
+
+
+          <!-- Email input -->
+          <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Email </label>
+            <input type="email" name="email" formControlName="email" class="form-control form-control-lg"
+              placeholder="Entrez une adresse e-mail valide" required=""/>
+              <div class="text-danger" *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                <span *ngIf="userForm.controls['email'].errors?.['required']">Le champ est requis.</span>
+                <span *ngIf="userForm.controls['email'].errors?.['email']"> L'email est invalide. Veuillez entrer une adresse e-mail valide.
+                </span>
+              </div>
+          </div>
+
+          <!-- Password input -->
+          <div data-mdb-input-init class="form-outline mb-3">
+            <label class="form-label" for="form3Example4">Mot de passe</label>
+            <input type="password" name="password" formControlName="password"  class="form-control form-control-lg"
+              placeholder="Entrez le mot de passe" required=""/>
+              <div class="text-danger" *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+                <span *ngIf="userForm.controls['password'].errors?.['required']">Le champ est requis.</span>
+                <span *ngIf="userForm.controls['password'].errors?.['minlength']">Un minimum de 6 caractères est requis.</span>
+              </div>
+
+          </div>
+
+      
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button (click)="onLogin()" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Se connecter</button>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>
+</section>

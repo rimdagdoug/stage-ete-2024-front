@@ -1,0 +1,42 @@
+<app-header></app-header>
+<section class="vh-100">
+  <div class="container my-5">
+    <h2>Modifier la compétence</h2>
+    <form [formGroup]="skillForm" (ngSubmit)="updateSkill()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nom de la compétence</label>
+        <input type="text" class="form-control" id="name" formControlName="name" required>
+        <div class="text-danger" *ngIf="skillForm.controls['name'].invalid && (skillForm.controls['name'].touched || skillForm.controls['name'].dirty)">
+          <span *ngIf="skillForm.controls['name'].errors?.['required']">Le champ est requis.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" formControlName="description" rows="3" required></textarea>
+        <div class="text-danger" *ngIf="skillForm.controls['description'].invalid && (skillForm.controls['description'].touched || skillForm.controls['description'].dirty)">
+          <span *ngIf="skillForm.controls['description'].errors?.['required']">Le champ est requis.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="coefficient" class="form-label">Coefficient</label>
+        <input type="number" class="form-control" id="coefficient" formControlName="coefficient" required>
+        <div class="text-danger" *ngIf="skillForm.controls['coefficient'].invalid && (skillForm.controls['coefficient'].touched || skillForm.controls['coefficient'].dirty)">
+          <span *ngIf="skillForm.controls['coefficient'].errors?.['required']">Le champ est requis.</span>
+          <span *ngIf="skillForm.controls['coefficient'].errors?.['min']">Coefficient must be a positive number</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="skillType" class="form-label">Type de compétence</label>
+        <select class="form-control" id="skillType" formControlName="skillType" required>
+          <option value="" disabled selected>Choisissez un type de compétence</option>
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+        <div class="text-danger" *ngIf="skillForm.controls['skillType'].invalid && (skillForm.controls['skillType'].touched || skillForm.controls['skillType'].dirty)">
+          <span>Le champ est requis.</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+  </div>
+</section>
+<app-footer></app-footer>

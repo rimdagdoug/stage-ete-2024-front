@@ -1,0 +1,25 @@
+<app-header></app-header>
+<section class="vh-100">
+  <div class="container my-5">
+    <h2>Détails de la compétence : {{ skillForm.get('name')?.value }}</h2>
+    <form [formGroup]="skillForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nom de la compétence</label>
+        <input type="text" class="form-control" id="name" formControlName="name" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" formControlName="description" readonly rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="coefficient" class="form-label">Coefficient</label>
+        <input type="number" class="form-control" id="coefficient" formControlName="coefficient" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="skillType" class="form-label">Type de compétence</label>
+        <input type="text" class="form-control" id="skillType" formControlName="skillType" readonly>
+      </div>
+    </form>
+  </div>
+</section>
+<app-footer></app-footer>

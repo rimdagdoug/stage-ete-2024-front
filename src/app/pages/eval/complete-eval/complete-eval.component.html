@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<section class="min-vh-100 bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">Évaluation : {{ evals[0]!.evaluation!.developer!.firstname }}  {{ evals[0]!.evaluation!.developer!.lastname }}</h2>
+        <form [formGroup]="evalForm" (ngSubmit)="onSubmit()" class="container mt-4">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">Compétence</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Note</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="skills">
+              <tr *ngFor="let skill of skillsArray.controls; let i = index" [formGroupName]="i">
+                <td class="text-center">{{ i + 1 }}</td>
+                <td class="text-center">
+                  <span>{{ skill.get('name')!.value }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ skill.get('description')!.value }}</span>
+                </td>
+                <td>
+                  <input id="note-{{ i }}" formControlName="note" type="number" class="form-control" required>
+                  <div *ngIf="skill.get('note')?.invalid && (skill.get('note')?.touched || skill.get('note')?.dirty)" class="text-danger">
+                    <div *ngIf="skill.get('note')?.errors?.['required']">La note est requise.</div>
+                    <div *ngIf="skill.get('note')?.errors?.['min']">La note ne peut pas être négative.</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="evalForm.invalid">Valider</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

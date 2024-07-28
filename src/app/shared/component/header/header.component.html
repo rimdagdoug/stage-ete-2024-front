@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Évaluations
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="'/list-eval'">Liste Évaluation</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/add-eval'" *appPermissionDirective="'RH'">Planifier Évaluation</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *appPermissionDirective="'RH'">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownSkills" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Compétences
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownSkills">
+            <li><a class="dropdown-item" [routerLink]="'/list-skills'">Liste Compétence</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/add-skills'">Ajouter Compétence</a></li>
+          </ul>
+        </li>
+      </ul>
+      <span class="navbar-text me-3">
+        Bonjour, {{ firstname }} {{ lastname }}!
+      </span>
+      <form class="d-flex">
+        <button class="btn btn-outline-danger me-2" (click)="logout()" type="button">Déconnecter</button>
+      </form>
+    </div>
+  </div>
+</nav>

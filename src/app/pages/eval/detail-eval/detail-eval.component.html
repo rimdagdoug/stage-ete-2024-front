@@ -1,0 +1,37 @@
+<app-header></app-header>
+<section class="min-vh-100 bg-light py-5">
+<div >
+  <h2 class="text-center mb-4">Évaluation : {{ evals[0]!.evaluation!.developer!.firstname }}  {{ evals[0]!.evaluation!.developer!.lastname }}</h2>
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nom de la Compétence</th>
+          <th>Note du développeur</th>
+          <th>Note du gestionnaire</th>
+          <th>note finale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let skill of skills">
+          <td>{{ skill.skills.name }}</td>
+          <td>{{ skill.noteDeveloper }}</td>
+          <td>{{ skill.noteManager }}</td>
+          <td>{{ skill.finalNote }}</td>
+         
+
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="finalScore !== null" class="mt-4 text-center">
+      <h4>Note Finale Globale : 
+        <span class="badge" [ngClass]="{'bg-success': finalScore >= 7.5, 'bg-warning': finalScore < 7.5 && finalScore >= 5, 'bg-danger': finalScore < 5
+        }">
+          {{ finalScore }}
+        </span>
+      </h4>
+    </div>
+
+  </div>
+</section>
+  <app-footer></app-footer>
+  
