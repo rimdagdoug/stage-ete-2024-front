@@ -7,6 +7,7 @@ import { ListEvalComponent } from './list-eval/list-eval.component';
 import { authGuard } from 'src/app/shared/guard/auth.guard';
 import { CompleteEvalComponent } from './complete-eval/complete-eval.component';
 import { DetailEvalComponent } from './detail-eval/detail-eval.component';
+import { roleGuard } from 'src/app/shared/guard/role.guard';
 
 
 
@@ -14,12 +15,13 @@ const routes: Routes = [
     {
         path: 'add-eval',
         component: AddEvalComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard,roleGuard],
+        
       },
       {
         path: 'edit-eval/:id',
         component: EditEvalComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard,roleGuard]
       },
       {
         path: 'list-eval',

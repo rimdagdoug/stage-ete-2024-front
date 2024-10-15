@@ -7,7 +7,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
   if ( localRole == "RH" ) {
     return true;
   } else{
-    router.navigateByUrl('/dashboard');
+    router.navigateByUrl('/list-eval');
     return false;
   }
   

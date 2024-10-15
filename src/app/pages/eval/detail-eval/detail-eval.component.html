@@ -26,7 +26,7 @@
       <h4>Note Finale Globale : 
         <span class="badge" [ngClass]="{'bg-success': finalScore >= 7.5, 'bg-warning': finalScore < 7.5 && finalScore >= 5, 'bg-danger': finalScore < 5
         }">
-          {{ finalScore }}
+          {{ finalScore | number:'1.0-2' }}
         </span>
       </h4>
     </div>

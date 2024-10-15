@@ -1,7 +1,10 @@
 <app-header></app-header>
-<section class="vh-100">
-  <div class="container my-5">
-    <h2>Modifier la compétence</h2>
+<section class="min-vh-100 bg-light py-5">
+    <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">Modifier la compétence</h2>
+
     <form [formGroup]="skillForm" (ngSubmit)="updateSkill()">
       <div class="mb-3">
         <label for="name" class="form-label">Nom de la compétence</label>
@@ -35,8 +38,14 @@
           <span>Le champ est requis.</span>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="skillForm.invalid">Enregistrer</button>
+      </div>
+
     </form>
+  
   </div>
+</div>
+</div>
 </section>
 <app-footer></app-footer>
