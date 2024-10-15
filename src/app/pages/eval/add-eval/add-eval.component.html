@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <h2 class="text-center mb-4">Ajouter une évaluation</h2>
+        <h2 class="text-center mb-4">Planifier une évaluation</h2>
         
         <form (ngSubmit)="addEval(evaluation)" #evalForm="ngForm">
           <div class="mb-3">
@@ -28,7 +28,7 @@
           
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary btn-lg" [disabled]="!evalForm.form.valid">
-              Ajouter l'évaluation
+              Planifier l'évaluation
             </button>
           </div>
         </form>
