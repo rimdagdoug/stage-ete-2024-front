@@ -28,10 +28,10 @@ export class AddSkillsComponent implements OnInit {
   
   addSkill(): void {
     if (this.skillForm.valid) { // Vérifiez si le formulaire est valide
-      this.skillService.createSkill(this.skillForm.value).subscribe(result => {
-        this.skillForm.patchValue(result);
-        this.router.navigate(['/list-skills']); // Déplacez la navigation ici
-      });
+      // this.skillService.createSkill(this.skillForm.value).subscribe(result => {
+      //   this.skillForm.patchValue(result);
+      //   this.router.navigate(['/list-skills']); // Déplacez la navigation ici
+      // });
     } else {
       // Optionnel : Vous pouvez afficher un message d'erreur ou gérer les erreurs ici
       console.warn('Form is invalid:', this.skillForm.errors);

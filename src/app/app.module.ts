@@ -11,6 +11,12 @@ import { CommonModule } from '@angular/common';
 import { SkillsModule } from './pages/skills/skills.module';
 import { SharedModule } from './shared/shared/shared.module';
 import { EvalModule } from './pages/eval/eval.module';
+import { StoreModule } from '@ngrx/store';
+import { skillsReducer } from './state/skills.reducer';
+import { SkillsEffects } from './state/skills.effects';
+import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+
 
 
 @NgModule({
@@ -27,7 +33,10 @@ import { EvalModule } from './pages/eval/eval.module';
     SkillsModule,
     SharedModule,
     EvalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({ skills: skillsReducer}), 
+    EffectsModule.forRoot([SkillsEffects]), 
+    RouterModule
   ],
   providers: [
     {

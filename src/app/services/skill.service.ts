@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Skills } from '../shared/interfaces/skills.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class SkillService {
 
   constructor(private http:HttpClient) { }
 
-  getSkills(): Observable<any[]>{
-    return this.http.get<any[]>(this.apiUrl);
+  getSkills(): Observable<Skills[]>{
+    return this.http.get<Skills[]>(this.apiUrl);
   }
 
   getSkillById(id: number): Observable<any>{
