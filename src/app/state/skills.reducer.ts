@@ -9,5 +9,12 @@ export const initState: {skills: Skills[]} = {
 
 export const skillsReducer = createReducer(
     initState,
-    on(Actions.loadSkillsSuccess, (state, { payload}) => ({...state, skills: payload}))
-)
+    on(Actions.loadSkills, (state) => ({
+        ...state, 
+        skills : []
+    })),
+    on(Actions.loadSkillsSuccess, (state, { payload}) => ({
+        ...state, 
+        skills: payload
+    }))
+    )

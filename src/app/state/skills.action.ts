@@ -1,13 +1,38 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, props, Action  } from "@ngrx/store";
 import { Skills } from "../shared/interfaces/skills.interface";
+import { HttpErrorResponse } from "@angular/common/http";
 
 
-export const actionsList = {
-    loadSkills: "[ Skills Table Component ] Load skills ",
-    loadSkillsSuccess: "[ Load skills success]"
-};
 
-export const loadSkills = createAction(actionsList.loadSkills);
+export const loadSkills = createAction("[ SKILLS ] Load skills ");
+
+export interface loadSkillsSuccessProperty { 
+    payload: Skills[]
+}
+
 export const loadSkillsSuccess = createAction(
-    actionsList.loadSkillsSuccess, 
-    props<{ payload: Skills[]}>())
+    "[ SKILLS ] Load skills success", 
+props<loadSkillsSuccessProperty>())
+
+export interface addSkillsProperty  {
+    skill: Skills,
+}
+
+export const addSkills = createAction(
+    "[ SKILLS ] add skills",
+    props<addSkillsProperty>() 
+);
+
+export interface addSKillsSucessProperty { 
+    payload: Skills[]
+}
+
+export const addSkillsSuccess = createAction(
+    "[ SKILLS ] add skills success",
+    props<addSKillsSucessProperty>()
+)    
+
+export const addSkillsFailure = createAction(
+    "[ SKILLS ]  add skills failure",
+    props<{error : HttpErrorResponse}>()
+)    
