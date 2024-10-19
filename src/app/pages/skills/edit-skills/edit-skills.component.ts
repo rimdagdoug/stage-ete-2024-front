@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
+import { updateSkill } from 'src/app/state/skills.action';
+import { AppState } from 'src/app/state/skills.selectors';
 
 @Component({
   selector: 'app-edit-skills',
@@ -17,7 +20,8 @@ export class EditSkillsComponent implements OnInit {
   constructor(
     private skillService: SkillService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) { 
     this.skillForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -53,14 +57,16 @@ export class EditSkillsComponent implements OnInit {
     if (this.skillForm.valid) {
       const id = this.route.snapshot.paramMap.get('id');
       if (id !== null) {
-        this.skillService.updateSkill(parseInt(id), this.skillForm.value).subscribe(
-          updatedSkill => {
-            this.router.navigate(['/list-skills']);
-          },
-          error => {
-            console.error('Error updating skill:', error);
-          }
-        );
+        const skill = this.skillForm.value;
+        this.store.dispatch(updateSkill({ id: parseInt(id), skill }));
+        // this.skillService.updateSkill(parseInt(id), this.skillForm.value).subscribe(
+        //   updatedSkill => {
+        //     this.router.navigate(['/list-skills']);
+        //   },
+        //   error => {
+        //     console.error('Error updating skill:', error);
+        //   }
+        // );
       }
     } else {
       console.warn('Form is invalid:', this.skillForm.errors);
