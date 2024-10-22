@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,11 +11,10 @@ import { CommonModule } from '@angular/common';
 import { SkillsModule } from './pages/skills/skills.module';
 import { SharedModule } from './shared/shared/shared.module';
 import { EvalModule } from './pages/eval/eval.module';
-import { StoreModule } from '@ngrx/store';
-import { skillsReducer } from './state/skills.reducer';
-import { SkillsEffects } from './state/skills.effects';
 import { RouterModule } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 
 
@@ -26,6 +25,8 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     BrowserModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -34,9 +35,8 @@ import { EffectsModule } from '@ngrx/effects';
     SharedModule,
     EvalModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ skills: skillsReducer}), 
-    EffectsModule.forRoot([SkillsEffects]), 
-    RouterModule
+
+    RouterModule, StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [
     {
@@ -44,6 +44,7 @@ import { EffectsModule } from '@ngrx/effects';
       useClass: AuthInterceptor,
       multi: true
     }
+
   ],
 
   bootstrap: [AppComponent]

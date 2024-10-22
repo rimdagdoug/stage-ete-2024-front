@@ -1,14 +1,24 @@
-import { createSelector } from "@ngrx/store";
-import { Skills } from "../shared/interfaces/skills.interface";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { RolesState, SkillsState } from "./skills.reducer";
 
-export interface AppState {
-    skills: Skills[];
-}
 
-export const selectFeature = (state: AppState) => state.skills;
+export const selectSkillsState = createFeatureSelector<SkillsState>('skills')
 
 export const selectAll = createSelector(
-    selectFeature,
-    (state: Skills[]) => state
+    selectSkillsState,
+    (state) => state.skills
+);
+
+
+export const selectSelectedSkill = createSelector(
+    selectSkillsState,
+    (state) => state.selectedSkill 
+);
+
+export const selectRolesState = createFeatureSelector<RolesState>('roles');
+
+export const selectAllRoles = createSelector(
+  selectRolesState,
+  (state) => state.roles
 );
 

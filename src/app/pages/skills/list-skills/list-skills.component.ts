@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { SkillService } from 'src/app/services/skill.service';
-import { AppState, selectAll, selectFeature } from 'src/app/state/skills.selectors';
+import { selectAll } from 'src/app/state/skills.selectors';
 import * as Actions from '../../../state/skills.action'
 import { Skills } from 'src/app/shared/interfaces/skills.interface';
 import { Observable } from 'rxjs';
+import { SkillsState } from 'src/app/state/skills.reducer';
 
 @Component({
   selector: 'app-list-skills',
@@ -14,8 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class ListSkillsComponent implements OnInit {
   skills: Skills[] = []; 
-  dataSource$: Observable<Skills[]> = this.store.select(selectFeature);
-  constructor(private router: Router, private store: Store<AppState>) {
+  dataSource$: Observable<Skills[]> = this.store.select(selectAll);
+  constructor(private router: Router, private store: Store) {
     this.store.dispatch(Actions.loadSkills());
    }
 
@@ -23,17 +23,20 @@ export class ListSkillsComponent implements OnInit {
     this.dataSource$
     .subscribe(
       (result: any) => {
-        this.skills = Array.isArray(result.skills) ? result.skills : []; 
+        this.skills = Array.isArray(result) ? result : []; 
       }
     );
   }
 
   editSkill(id: number): void {
+    this.store.dispatch(Actions.detailSkill({ id }));
     this.router.navigate(['/edit-skills', id]);
   }
 
   viewSkill(id: number): void {
+    this.store.dispatch(Actions.detailSkill({ id }));
     this.router.navigate(['/detail-skill', id]);
+
   }
 
   addSkill(): void {

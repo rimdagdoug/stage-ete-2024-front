@@ -3,8 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
-import { updateSkill } from 'src/app/state/skills.action';
-import { AppState } from 'src/app/state/skills.selectors';
+import { loadRoles } from 'src/app/state/roles.action';
+import { detailSkill, updateSkill } from 'src/app/state/skills.action';
+import { selectAllRoles, selectSelectedSkill } from 'src/app/state/skills.selectors';
 
 @Component({
   selector: 'app-edit-skills',
@@ -20,8 +21,7 @@ export class EditSkillsComponent implements OnInit {
   constructor(
     private skillService: SkillService,
     private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<AppState>
+    private store: Store
   ) { 
     this.skillForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -34,23 +34,37 @@ export class EditSkillsComponent implements OnInit {
   ngOnInit(): void {
     this.getSkill();
     this.getRoles(); 
+
+    this.store.select(selectSelectedSkill).subscribe(skill => {
+      if (skill) {
+        this.skillForm.patchValue(skill);
+      }
+    });
+
+    this.store.select(selectAllRoles).subscribe(roles => {
+      this.roles = roles;
+    });
   }
+
+  
 
   getSkill(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-      this.skillService.getSkillById(parseInt(id)).subscribe(
-        skill => {
-          this.skillForm.patchValue(skill);
-        }
-      );
+      this.store.dispatch(detailSkill({id: parseInt(id)}));
+      // this.skillService.getSkillById(parseInt(id)).subscribe(
+      //   skill => {
+      //     this.skillForm.patchValue(skill);
+      //   }
+      // );
     }
   }
 
   getRoles(): void {
-    this.skillService.getRoles().subscribe(roles => {
-      this.roles = roles;
-    });
+    this.store.dispatch(loadRoles());
+    // this.skillService.getRoles().subscribe(roles => {
+    //   this.roles = roles;
+    // });
   }
 
   updateSkill(): void {
@@ -59,14 +73,6 @@ export class EditSkillsComponent implements OnInit {
       if (id !== null) {
         const skill = this.skillForm.value;
         this.store.dispatch(updateSkill({ id: parseInt(id), skill }));
-        // this.skillService.updateSkill(parseInt(id), this.skillForm.value).subscribe(
-        //   updatedSkill => {
-        //     this.router.navigate(['/list-skills']);
-        //   },
-        //   error => {
-        //     console.error('Error updating skill:', error);
-        //   }
-        // );
       }
     } else {
       console.warn('Form is invalid:', this.skillForm.errors);

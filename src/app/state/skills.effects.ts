@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { SkillService } from "../services/skill.service";
-import { addSkillsSuccess, addSkillsProperty, addSkills, loadSkills, loadSkillsSuccess, updateSkill, updateSkillProperty, updateSkillSuccess } from "./skills.action";
+import { addSkillsSuccess, addSkillsProperty, addSkills, loadSkills, loadSkillsSuccess, updateSkill, updateSkillProperty, updateSkillSuccess, detailSkill, detailSkillSuccess, detailSkillFailure } from "./skills.action";
 import { catchError, EMPTY, exhaustMap, map, mergeMap, of } from "rxjs";
 import { Skills } from '../shared/interfaces/skills.interface';
 import { Router } from "@angular/router";
@@ -46,6 +46,15 @@ export class SkillsEffects {
         )
     ))
 
+    detailSkill$ = createEffect(() => this.actions$.pipe(
+        ofType(detailSkill),
+        mergeMap((action) =>
+            this.skillsService.getSkillById(action.id).pipe(
+                map((skill: Skills) => detailSkillSuccess({ skill })),
+                catchError((error) => of(detailSkillFailure({ error })))
+            )
+        )
+    ));
     constructor(
         private router: Router, 
         private actions$: Actions,
