@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
 import { addSkills } from 'src/app/state/skills.action';
+import { SkillsState } from 'src/app/state/skills.reducer';
 
-import { AppState } from 'src/app/state/skills.selectors';
 
 @Component({
   selector: 'app-add-skills',
@@ -17,7 +16,7 @@ export class AddSkillsComponent implements OnInit {
   skillForm: FormGroup;
   roles: any[] = []; 
 
-  constructor(private skillService: SkillService, private store: Store<AppState>) { 
+  constructor(private skillService: SkillService, private store: Store<SkillsState>) { 
     this.skillForm = new FormGroup({
       name: new FormControl("",[Validators.required]),
       description: new FormControl("",[Validators.required]),

@@ -61,3 +61,27 @@ export const updateSkillsFailure = createAction(
     "[ SKILLS] update skills failure",
     props<{error : HttpErrorResponse}>()
 )
+
+export interface detailSkillProperty {
+    id: number;
+}
+
+export const detailSkill = createAction(
+    "[ SKILLS ] deatil skill",
+    props<detailSkillProperty>()
+);
+
+export interface detailSkillSuccessProperty {
+    skill: Skills
+}
+
+export const detailSkillSuccess = createAction(
+    "[ SKILLS ] detail skill success",
+    props<detailSkillSuccessProperty>()
+);
+
+export const detailSkillFailure = createAction(
+    "[ SKILLS] detail skills failure",
+    props<{error : HttpErrorResponse}>()
+)
+

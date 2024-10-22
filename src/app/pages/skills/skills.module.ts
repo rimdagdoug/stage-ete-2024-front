@@ -8,6 +8,7 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { CommonModule } from '@angular/common';
 import { DetailSkillComponent } from './detail-skill/detail-skill.component';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { SkillsStoreModule } from 'src/app/state/skills-store.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
   ],
   imports: [
     CommonModule,
+    SkillsStoreModule,
     SkillsRoutingModule,
     FormsModule,
     SharedModule,
