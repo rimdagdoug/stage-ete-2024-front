@@ -1,9 +1,9 @@
 // roles.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { SkillService } from '../services/skill.service';
 import { loadRoles, loadRolesSuccess, loadRolesFailure } from './roles.action';
 import { catchError, map, mergeMap, of } from 'rxjs';
+import { SkillService } from 'src/app/services/skill.service';
 
 @Injectable()
 export class RolesEffects {
@@ -18,5 +18,6 @@ export class RolesEffects {
   constructor(
     private actions$: Actions,
     private skillService: SkillService
+    
   ) {}
 }

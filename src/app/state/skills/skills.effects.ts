@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { SkillService } from "../services/skill.service";
+import { SkillService } from "../../services/skill.service";
 import { addSkillsSuccess, addSkillsProperty, addSkills, loadSkills, loadSkillsSuccess, updateSkill, updateSkillProperty, updateSkillSuccess, detailSkill, detailSkillSuccess, detailSkillFailure } from "./skills.action";
 import { catchError, EMPTY, exhaustMap, map, mergeMap, of } from "rxjs";
-import { Skills } from '../shared/interfaces/skills.interface';
+import { Skills } from '../../shared/interfaces/skills.interface';
 import { Router } from "@angular/router";
 
 @Injectable()

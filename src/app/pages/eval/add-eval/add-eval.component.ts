@@ -27,10 +27,14 @@ export class AddEvalComponent {
   }
 
   evaluation: Evaluation = {
+    id: 0,
     developerId: '0',
     managerId: '0',
-    statut: '',
-  };
+    status: '',
+    finalNote: 0, 
+    developer: { id: 0, firstname: '', lastname: '', email: '', password: '', username: '', role: '', enabled: false, accountNonExpired: false, credentialsNonExpired: false, accountNonLocked: false, authorities: [] }, // Placeholder for developer
+    manager: { id: 0, firstname: '', lastname: '', email: '', password: '', username: '', role: '', enabled: false, accountNonExpired: false, credentialsNonExpired: false, accountNonLocked: false, authorities: [] } // Placeholder for manager
+};
 
   getManagers() {
     this.userService.getManagers().subscribe(managers => {
