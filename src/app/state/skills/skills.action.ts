@@ -1,5 +1,5 @@
 import { createAction, props, Action  } from "@ngrx/store";
-import { Skills } from "../shared/interfaces/skills.interface";
+import { Skills } from "../../shared/interfaces/skills.interface";
 import { HttpErrorResponse } from "@angular/common/http";
 
 

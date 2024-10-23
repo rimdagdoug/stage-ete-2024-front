@@ -1,5 +1,11 @@
+import { User } from "./user.interface";
+
 export interface Evaluation {
-    developerId: string;
-    managerId: string;
-    statut: string;
-  }
+  id: number;            
+  developerId: string;
+  managerId: string
+  status: string;      
+  finalNote: number;     
+  developer: User;      
+  manager: User;       
+}

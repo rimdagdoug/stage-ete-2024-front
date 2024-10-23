@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { CompleteEvalComponent } from './complete-eval/complete-eval.component';
 import { DetailEvalComponent } from './detail-eval/detail-eval.component';
+import { EvalsStoreModule } from 'src/app/state/eval/evals-store.module';
 
 
 
@@ -24,6 +25,7 @@ import { DetailEvalComponent } from './detail-eval/detail-eval.component';
   ],
   imports: [
     CommonModule,
+    EvalsStoreModule,
     EvalRoutingModule,
     FormsModule,
     SharedModule,

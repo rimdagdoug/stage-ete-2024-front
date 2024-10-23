@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectAll } from 'src/app/state/skills.selectors';
-import * as Actions from '../../../state/skills.action'
+import { selectAll } from 'src/app/state/skills/skills.selectors';
+import * as Actions from '../../../state/skills/skills.action'
 import { Skills } from 'src/app/shared/interfaces/skills.interface';
 import { Observable } from 'rxjs';
-import { SkillsState } from 'src/app/state/skills.reducer';
+import { SkillsState } from 'src/app/state/skills/skills.reducer';
 
 @Component({
   selector: 'app-list-skills',

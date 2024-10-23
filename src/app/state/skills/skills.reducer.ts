@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Skills } from "../shared/interfaces/skills.interface";
+import { Skills } from "../../shared/interfaces/skills.interface";
 import * as Actions from "./skills.action";
 
 export interface SkillsState {

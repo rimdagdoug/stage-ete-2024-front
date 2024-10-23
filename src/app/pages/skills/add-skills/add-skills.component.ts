@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
-import { addSkills } from 'src/app/state/skills.action';
-import { SkillsState } from 'src/app/state/skills.reducer';
+import { addSkills } from 'src/app/state/skills/skills.action';
+import { SkillsState } from 'src/app/state/skills/skills.reducer';
 
 
 @Component({

@@ -8,7 +8,8 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { CommonModule } from '@angular/common';
 import { DetailSkillComponent } from './detail-skill/detail-skill.component';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
-import { SkillsStoreModule } from 'src/app/state/skills-store.module';
+import { SkillsStoreModule } from 'src/app/state/skills/skills-store.module';
+import { RolesStoreModule } from 'src/app/state/roles/roles-store.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SkillsStoreModule } from 'src/app/state/skills-store.module';
   imports: [
     CommonModule,
     SkillsStoreModule,
+    RolesStoreModule,
     SkillsRoutingModule,
     FormsModule,
     SharedModule,

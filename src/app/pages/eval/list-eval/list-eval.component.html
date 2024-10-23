@@ -25,11 +25,11 @@
               <tr *ngFor="let eval of evals">
                 <td>{{ eval.manager.firstname }} {{ eval.manager.lastname }}</td>
                 <td>{{ eval.developer.firstname }} {{ eval.developer.lastname }}</td>
-                <td>{{ eval.status | statusEval }}</td>
-                <td>{{ eval.finalNote | number:'1.0-2'}}</td>
+                <td>{{ eval.status | statusEval }}</td> <!-- Changed from status to statut -->
+                <td>{{ eval.finalNote | number:'1.0-2'}}</td> <!-- Ensure finalNote is defined -->
                 <td>
-                  <button class="btn btn-info btn-sm me-2" [routerLink]="['/detail-eval', eval.id]">Consulter</button>
-                  <button class="btn btn-info btn-sm me-2" *ngIf="eval.status | showButton" [routerLink]="['/complete-eval', eval.id]">Saisie notes</button>
+                    <button class="btn btn-info btn-sm me-2" [routerLink]="['/detail-eval', eval.id]">Consulter</button> <!-- Ensure id exists -->
+                    <button class="btn btn-info btn-sm me-2" *ngIf="eval.status | showButton" [routerLink]="['/complete-eval', eval.id]">Saisie notes</button> <!-- Changed from status to statut -->
                 </td>
               </tr>
             </tbody>

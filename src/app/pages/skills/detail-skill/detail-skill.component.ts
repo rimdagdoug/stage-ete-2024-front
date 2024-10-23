@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { Skills } from 'src/app/shared/interfaces/skills.interface';
-import { detailSkill } from 'src/app/state/skills.action';
-import { selectAll, selectSelectedSkill } from 'src/app/state/skills.selectors'; // Ensure this is imported
+import { detailSkill } from 'src/app/state/skills/skills.action';
+import { selectAll, selectSelectedSkill } from 'src/app/state/skills/skills.selectors'; // Ensure this is imported
 
 @Component({
   selector: 'app-detail-skill',
