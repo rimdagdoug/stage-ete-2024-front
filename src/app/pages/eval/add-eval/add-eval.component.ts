@@ -1,10 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { EvalService } from 'src/app/services/eval.service';
 import { UserService } from 'src/app/services/user.service';
 import { Evaluation } from 'src/app/shared/interfaces/evaluation.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { addEval } from 'src/app/state/eval/eval.action';
+import { EvaluationState } from 'src/app/state/eval/eval.reducer';
 
 @Component({
   selector: 'app-add-eval',
@@ -20,14 +23,15 @@ export class AddEvalComponent {
   constructor(
     private evalService: EvalService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private store: Store<EvaluationState>
   ) {
     this.getManagers();
     this.getDevelopers();
   }
 
   evaluation: Evaluation = {
-    id: 0,
+    
     developerId: '0',
     managerId: '0',
     status: '',
@@ -49,18 +53,7 @@ export class AddEvalComponent {
   }
 
   addEval(evaluation: Evaluation): void {
-    this.evalService.createeval(evaluation).subscribe(
-      evaluation => {
-        this.evaluation = evaluation;
-        this.router.navigate(['/list-eval']);
-      },
-      (error: HttpErrorResponse) => {
-        if (error.status === 500) {
-          this.errorMessage = 'Une erreur interne s\'est produite lors de l\'ajout de l\'évaluation.';
-        } else {
-          this.errorMessage = 'Une erreur est survenue lors de l\'ajout de l\'évaluation.';
-        }
-      }
-    );
-  }
+    this.store.dispatch(addEval({ evaluation: { ...this.evaluation, id: undefined } }));
+}
+  
 }
