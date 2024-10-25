@@ -1,20 +1,24 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EvalService } from 'src/app/services/eval.service';
 import { UserService } from 'src/app/services/user.service';
 import { Evaluation } from 'src/app/shared/interfaces/evaluation.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { loadDeveloper } from 'src/app/state/developer/developer.action';
+import { selectAllDevelopers } from 'src/app/state/developer/developer.selector';
 import { addEval } from 'src/app/state/eval/eval.action';
 import { EvaluationState } from 'src/app/state/eval/eval.reducer';
+import { loadManagers } from 'src/app/state/manager/manager.action';
+import { selectAllManagers } from 'src/app/state/manager/managers.selector';
 
 @Component({
   selector: 'app-add-eval',
   templateUrl: './add-eval.component.html',
   styleUrls: ['./add-eval.component.css']
 })
-export class AddEvalComponent {
+export class AddEvalComponent implements OnInit{
 
   managers: User[] = [];
   developers: User[] = [];
@@ -26,8 +30,19 @@ export class AddEvalComponent {
     private router: Router,
     private store: Store<EvaluationState>
   ) {
+   
+  }
+  ngOnInit(): void {
     this.getManagers();
     this.getDevelopers();
+
+    this.store.select(selectAllManagers).subscribe(managers => {
+      this.managers = managers;
+    });
+
+    this.store.select(selectAllDevelopers).subscribe(developers => {
+      this.developers = developers;
+    });
   }
 
   evaluation: Evaluation = {
@@ -41,15 +56,14 @@ export class AddEvalComponent {
 };
 
   getManagers() {
-    this.userService.getManagers().subscribe(managers => {
-      this.managers = managers;
-    });
+    // this.userService.getManagers().subscribe(managers => {
+    //   this.managers = managers;
+    //});
+    this.store.dispatch(loadManagers());
   }
 
   getDevelopers() {
-    this.userService.getDevelopers().subscribe(developers => {
-      this.developers = developers;
-    });
+    this.store.dispatch(loadDeveloper());
   }
 
   addEval(evaluation: Evaluation): void {

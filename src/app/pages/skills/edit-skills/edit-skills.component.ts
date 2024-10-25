@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
 import { loadRoles } from 'src/app/state/roles/roles.action';
 import { detailSkill, updateSkill } from 'src/app/state/skills/skills.action';
-import { selectAllRoles, selectSelectedSkill } from 'src/app/state/skills/skills.selectors';
+import { selectSelectedSkill } from 'src/app/state/skills/skills.selectors';
+import { selectAllRoles } from 'src/app/state/roles/roles.selector';
 
 @Component({
   selector: 'app-edit-skills',
