@@ -9,6 +9,8 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { CompleteEvalComponent } from './complete-eval/complete-eval.component';
 import { DetailEvalComponent } from './detail-eval/detail-eval.component';
 import { EvalsStoreModule } from 'src/app/state/eval/evals-store.module';
+import { ManagersStoreModule } from 'src/app/state/manager/manager-store.module';
+import { DeveloperStoreModule } from 'src/app/state/developer/developer-store.module';
 
 
 
@@ -29,7 +31,9 @@ import { EvalsStoreModule } from 'src/app/state/eval/evals-store.module';
     EvalRoutingModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ManagersStoreModule,
+    DeveloperStoreModule
     
   ],
   exports: [

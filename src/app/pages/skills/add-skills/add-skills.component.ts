@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SkillService } from 'src/app/services/skill.service';
+import { loadRoles } from 'src/app/state/roles/roles.action';
+import { selectAllRoles } from 'src/app/state/roles/roles.selector';
 import { addSkills } from 'src/app/state/skills/skills.action';
 import { SkillsState } from 'src/app/state/skills/skills.reducer';
+//import { selectAllRoles } from 'src/app/state/skills/skills.selectors';
 
 
 @Component({
@@ -27,6 +30,10 @@ export class AddSkillsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRoles(); 
+
+    this.store.select(selectAllRoles).subscribe(roles => {
+      this.roles = roles;
+    });
   }
   
   addSkill(): void {
@@ -43,10 +50,9 @@ export class AddSkillsComponent implements OnInit {
     }
   }
  
-  getRoles() {
-    this.skillService.getRoles().subscribe(roles => {
-      this.roles = roles;
-    });
+  getRoles(): void {
+    this.store.dispatch(loadRoles());
+
   }
 
 }
