@@ -17,3 +17,8 @@ export const selectFinalNote = createSelector(
     selectEvaluationState,
     (state) => state.finalScore
 )
+
+export const selectInitialForm = createSelector(
+    selectEvaluationState,
+    (state) => state.evals 
+);

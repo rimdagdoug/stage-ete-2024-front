@@ -8,4 +8,5 @@ export interface Skills {
     createdAt: Date;
     updatedAt: Date;
     coefficient: number;
+    note?: number 
 }

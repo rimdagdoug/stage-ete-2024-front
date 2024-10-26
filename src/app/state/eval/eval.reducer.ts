@@ -1,13 +1,15 @@
 import { createReducer, on } from "@ngrx/store";
 import { Evaluation } from "src/app/shared/interfaces/evaluation.interface";
-import { detailEval, detailEvalFailure, detailEvalSuccess, finalScore, finalScoreFailure, finalScoreSuccess, loadEval, loadEvalSuccess } from "./eval.action";
+import { detailEval, detailEvalFailure, detailEvalSuccess, finalScore, finalScoreFailure, finalScoreSuccess, initialiseForm, initialiseFormSuccess, loadEval, loadEvalSuccess } from "./eval.action";
 import { notes } from "src/app/shared/interfaces/notes.interface";
+import { EvaluationInfo } from "src/app/shared/interfaces/evaluation-info.interface";
 
 
 export interface EvaluationState {
     evaluation: Evaluation[];
     notesEvals: notes [] | null;
     finalScore?: number ;
+    evals: EvaluationInfo[] 
     
 }
 
@@ -15,6 +17,7 @@ export const initState: EvaluationState = {
     evaluation: [],
     notesEvals: null,
     finalScore: undefined,
+    evals: []
 };
 
 export const evaluationReducer = createReducer(
@@ -53,6 +56,22 @@ export const evaluationReducer = createReducer(
     on(finalScoreFailure, (state, { error }) => ({
         ...state,
         finalScore: undefined, 
+        error
+    })),
+
+    on(initialiseForm, (state) => ({
+        ...state,
+        evals: [] 
+    })),
+    
+    on(initialiseFormSuccess, (state, { evals }) => ({
+        ...state,
+        evals: evals 
+    })),
+
+    on(detailEvalFailure, (state, { error }) => ({
+        ...state,
+        evals: [], 
         error
     })),
 

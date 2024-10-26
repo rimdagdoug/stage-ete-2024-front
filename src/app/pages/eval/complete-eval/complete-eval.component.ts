@@ -2,7 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { EvalService } from 'src/app/services/eval.service';
+import { EvaluationInfo } from 'src/app/shared/interfaces/evaluation-info.interface';
+import { initialiseForm } from 'src/app/state/eval/eval.action';
+import { selectInitialForm } from 'src/app/state/eval/eval.selector';
 
 
 @Component({
@@ -18,11 +23,14 @@ export class CompleteEvalComponent implements OnInit{
     skills: new FormArray([], Validators.required) 
   })
   idEval : number = 0;
-  evals: any;
+  evals: EvaluationInfo[] = [ {} as EvaluationInfo];
+  initialForm$ : Observable< EvaluationInfo [] > = this.store.select(selectInitialForm);
   constructor(
     private evalservice: EvalService,
     private route:ActivatedRoute,
-    private router: Router){
+    private router: Router,
+    private store: Store
+  ){
       this.firstname = localStorage.getItem('firstname');
       this.lastname = localStorage.getItem('lastname');
     }
@@ -31,20 +39,20 @@ export class CompleteEvalComponent implements OnInit{
    this.route.params.subscribe(params=> {
     const id = params['id'];
     this.idEval = id;
-    this.initialiseForm(id);
+    this.initialiseForms(id);
    })
   }
 
-  initialiseForm(id: number): void{
-    this.evalservice.getResultatEvaluationByIdEval(id).subscribe(
-      evaluation=> {
-       this.evals = evaluation;
-        this.evalForm.controls['evaluationId'].setValue(id);
-        evaluation.forEach((item:any) => {
-            this.addSkills(item);        
+  initialiseForms(id: number): void{
+    this.store.dispatch(initialiseForm({id : this.idEval}));
+    
+           this.evalForm.controls['evaluationId'].setValue(id);
+           this.initialForm$.subscribe(evals => {
+            evals.forEach((item: any) => {
+                this.addSkills(item);
+            });
         });
-      }
-    )
+  
   }
 
   addSkills(item : any) {

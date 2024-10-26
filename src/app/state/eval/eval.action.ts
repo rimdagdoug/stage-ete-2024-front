@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
+import { EvaluationInfo } from "src/app/shared/interfaces/evaluation-info.interface";
 import { Evaluation } from "src/app/shared/interfaces/evaluation.interface";
 import { notes } from "src/app/shared/interfaces/notes.interface";
 
@@ -86,5 +87,28 @@ export const finalScoreSuccess = createAction(
 
 export const finalScoreFailure = createAction(
     "[ FINALSCORE ] final score failure",
+    props<{error : HttpErrorResponse}>()
+)
+
+export interface initialiseFormProperty {
+    id: number;
+}
+
+export const initialiseForm = createAction(
+    "[INITIALFORM] initialiseForm ",
+    props<initialiseFormProperty>()
+)
+
+export interface initialiseFormSuccessProperty {
+    evals: EvaluationInfo[];
+}
+
+export const initialiseFormSuccess = createAction(
+    "[ INITIALFORM ] initialiseForm success",
+    props<initialiseFormSuccessProperty>()
+);
+
+export const initialiseFormFailure = createAction(
+    "[ INITIALFORM ] initialiseForm failure",
     props<{error : HttpErrorResponse}>()
 )

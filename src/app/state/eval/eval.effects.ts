@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EvalService } from "src/app/services/eval.service";
-import { addEval, addEvalProperty, addEvalSuccess, detailEval, detailEvalFailure, detailEvalSuccess, finalScore, finalScoreFailure, finalScoreSuccess, loadEval, loadEvalFailure, loadEvalSuccess } from "./eval.action";
+import { addEval, addEvalProperty, addEvalSuccess, detailEval, detailEvalFailure, detailEvalSuccess, finalScore, finalScoreFailure, finalScoreSuccess, initialiseForm, initialiseFormSuccess, loadEval, loadEvalFailure, loadEvalSuccess } from "./eval.action";
 import { catchError, exhaustMap, map, mergeMap, of } from "rxjs";
 import { Evaluation } from '../../shared/interfaces/evaluation.interface';
 import { Router } from "@angular/router";
 import { notes } from "src/app/shared/interfaces/notes.interface";
 import { User } from "src/app/shared/interfaces/user.interface";
+import { EvaluationInfo } from "src/app/shared/interfaces/evaluation-info.interface";
 
 @Injectable()
 export class EvalEffects {
@@ -64,6 +65,16 @@ export class EvalEffects {
             )}
         )
     ))
+
+    initialiseForm$ = createEffect(() => this.actions$.pipe(
+        ofType(initialiseForm),
+        mergeMap((action) =>
+            this.evalService.getResultatEvaluationByIdEval(action.id).pipe(
+                map((evals: EvaluationInfo[]) => initialiseFormSuccess({ evals })),
+                catchError((error) => of(detailEvalFailure({ error })))
+            )
+        )
+    ));
 
 
     constructor(
