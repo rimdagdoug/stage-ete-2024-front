@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { EvalService } from 'src/app/services/eval.service';
 import { notes} from 'src/app/shared/interfaces/notes.interface';
+import { detailEval, finalScore } from 'src/app/state/eval/eval.action';
+import { selectFinalNote, selectNotesEvals } from 'src/app/state/eval/eval.selector';
 
 
 @Component({
@@ -11,38 +15,17 @@ import { notes} from 'src/app/shared/interfaces/notes.interface';
 })
 export class DetailEvalComponent implements OnInit{
   evaluationId!: number;
-  skills: notes[] = [];
   finalScore: number | null = null;
-  evals: any;
+  notesEvals$ : Observable<notes[] | null> = this.store.select(selectNotesEvals);
+  finaleNote$ : Observable<number | undefined> = this.store.select(selectFinalNote);
+  
 
-  constructor(private route: ActivatedRoute, private evalService: EvalService) { }
+  constructor(private route: ActivatedRoute, private store: Store) { }
 
   ngOnInit(): void {
     this.evaluationId = +this.route.snapshot.paramMap.get('id')!;
-    this.getSkillsWithNotes(this.evaluationId);
-    this.getFinalScore(this.evaluationId);
+    this.store.dispatch(detailEval({id : this.evaluationId}));
+    this.store.dispatch(finalScore({id : this.evaluationId}))
   }
 
-  getSkillsWithNotes(id: number): void {
-    this.evalService.getResultatEvaluationByIdEval(id).subscribe(
-      data => {
-        this.evals = data;
-        this.skills = data;
-      },
-      error => {
-        console.error('Error fetching evaluation details', error);
-      }
-    );
-  }
-
-  getFinalScore(id: number): void {
-    this.evalService.getFinalScore(id).subscribe(
-      score => {
-        this.finalScore = score;
-      },
-      error => {
-        console.error('Error fetching final score', error);
-      }
-    )
-  }
 }

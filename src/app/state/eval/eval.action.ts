@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { createAction, props } from "@ngrx/store";
 import { Evaluation } from "src/app/shared/interfaces/evaluation.interface";
+import { notes } from "src/app/shared/interfaces/notes.interface";
+
 
 export const loadEval = createAction("[ EVAL ] Load eval");
 
@@ -38,5 +40,51 @@ export const addEvalSuccess = createAction(
 
 export const addEvalFailure = createAction(
     "[ EVAL ]  add eval failure",
+    props<{error : HttpErrorResponse}>()
+)
+
+export interface detailEvalProperty {
+    id: number;
+}
+
+export const detailEval = createAction(
+    "[ EVAL ] deatil eval",
+    props<detailEvalProperty>()
+);
+
+export interface detailEvalSuccessProperty {
+    notes: notes[],
+}
+
+export const detailEvalSuccess = createAction(
+    "[ EVAL ] detail eval success",
+    props<detailEvalSuccessProperty>()
+);
+
+export const detailEvalFailure = createAction(
+    "[ EVAL] detail eval failure",
+    props<{error : HttpErrorResponse}>()
+)
+
+export interface finalScoreProperty {
+    id: number;
+}
+
+export const finalScore = createAction(
+    "[ FINALSCORE ] final score",
+    props<finalScoreProperty>()
+);
+
+export interface finalScoreSuccessProperty {
+    finalScore: number
+}
+
+export const finalScoreSuccess = createAction(
+    "[ FINALSCORE ] final score success",
+    props<finalScoreSuccessProperty>()
+);
+
+export const finalScoreFailure = createAction(
+    "[ FINALSCORE ] final score failure",
     props<{error : HttpErrorResponse}>()
 )
