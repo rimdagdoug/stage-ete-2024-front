@@ -5,12 +5,12 @@
       <div class="col-md-8">
         <h2 class="text-center mb-4">Planifier une évaluation</h2>
         
-        <form (ngSubmit)="addEval(evaluation)" #evalForm="ngForm">
+        <form (ngSubmit)="addEval()" #evalForm="ngForm">
           <div class="mb-3">
             <label for="manager" class="form-label">Responsable</label>
             <select class="form-select" id="manager" [(ngModel)]="evaluation.managerId" name="manager" required>
               <option value="" disabled selected>Sélectionnez un manager</option>
-              <option *ngFor="let manager of managers" [value]="manager.id">
+              <option *ngFor="let manager of managers$ | async" [value]="manager.id">
                 {{ manager.firstname }} {{ manager.lastname }}
               </option>
             </select>
@@ -20,7 +20,7 @@
             <label for="developer" class="form-label">Collaborateur</label>
             <select class="form-select" id="developer" [(ngModel)]="evaluation.developerId" name="developer" required>
               <option value="" disabled selected>Sélectionnez un collaborateur</option>
-              <option *ngFor="let developer of developers" [value]="developer.id">
+              <option *ngFor="let developer of developers$ | async" [value]="developer.id">
                 {{ developer.firstname }} {{ developer.lastname }}
               </option>
             </select>
